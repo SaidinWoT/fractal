@@ -27,7 +27,7 @@ const (
 	pointsPerWalk = 10000000
 )
 
-func pointToPixel(p fractal.Point) (int, int) {
+func pointToPixel(p *fractal.Point) (int, int) {
 	return int((p.X - minX) / deltaX * width),
 		int((p.Y - minY) / deltaY * height)
 }
@@ -47,7 +47,7 @@ func main() {
 
 	max := float64(0)
 
-	pt := fractal.Point{
+	pt := &fractal.Point{
 		rnd.Float64()*2 - 1,
 		rnd.Float64()*2 - 1,
 	}

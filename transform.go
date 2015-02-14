@@ -4,7 +4,7 @@ type Coef struct {
 	P, A, B, C, D, E, F float64
 }
 
-type Transform func(Point) Point
+type Transform func(*Point) *Point
 
 type Variation struct {
 	W float64
@@ -12,17 +12,17 @@ type Variation struct {
 }
 
 func f(c Coef, vs []Variation) Transform {
-	return func(p Point) Point {
+	return func(p *Point) *Point {
 		out := &Point{}
-		vp := Point{
+		vp := &Point{
 			c.A*p.X + c.B*p.Y + c.C,
 			c.D*p.X + c.E*p.Y + c.F,
 		}
 
 		for _, v := range vs {
-			r := v.F(vp)
-			r = r.Scale(v.W)
-			out.Add(r)
+			p := v.F(vp)
+			r := (&p).Scale(v.W)
+			out.Add(*r)
 		}
 		return out
 	}
