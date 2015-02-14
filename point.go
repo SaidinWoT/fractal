@@ -14,20 +14,18 @@ func (p Point) R() float64 {
 	return math.Sqrt(p.R2())
 }
 
-func (p Point) Add(q Point) Point {
-	return Point{
-		p.X + q.X,
-		p.Y + q.Y,
-	}
+func (p *Point) Add(q Point) *Point {
+	p.X += q.X
+	p.Y += q.Y
+	return p
 }
 
-func (p Point) Scale(factor float64) Point {
-	return Point{
-		p.X * factor,
-		p.Y * factor,
-	}
+func (p *Point) Scale(factor float64) *Point {
+	p.X *= factor
+	p.Y *= factor
+	return p
 }
 
-func (p Point) Pixel() (int, int) {
+func (p *Point) Pixel() (int, int) {
 	return 0, 0
 }

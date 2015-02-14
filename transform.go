@@ -13,7 +13,7 @@ type Variation struct {
 
 func f(c Coef, vs []Variation) Transform {
 	return func(p Point) Point {
-		out := Point{}
+		out := &Point{}
 		vp := Point{
 			c.A*p.X + c.B*p.Y + c.C,
 			c.D*p.X + c.E*p.Y + c.F,
@@ -22,7 +22,7 @@ func f(c Coef, vs []Variation) Transform {
 		for _, v := range vs {
 			r := v.F(vp)
 			r = r.Scale(v.W)
-			out = out.Add(r)
+			out.Add(r)
 		}
 		return out
 	}
